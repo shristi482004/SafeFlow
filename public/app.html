@@ -21,66 +21,14 @@
   <div id="auth-view" class="auth-overlay">
     <div class="auth-card onboarding-card">
       <div class="auth-badge">SafeFlow Portal</div>
-      
-      <!-- Step 1: Language Preference -->
+
+      <!-- Step 1: Sign In / Sign Up -->
       <div id="ob-step-1" class="onboarding-step">
-        <h2>Choose Language / भाषा</h2>
-        <p class="auth-subtitle">Select your preferred system language.</p>
-        <div class="lang-selection-grid">
-          <button type="button" class="btn btn-primary btn-large-onboarding" onclick="selectOnboardingLanguage('en')">English (EN)</button>
-          <button type="button" class="btn btn-primary btn-large-onboarding" onclick="selectOnboardingLanguage('hi')">हिंदी (HI)</button>
-        </div>
-        <div style="text-align:center;margin-top:16px;">
-          <a href="index.html" class="ob-home-link">Back to Home</a>
-        </div>
-      </div>
-
-      <!-- Step 2: Accessibility Preferences -->
-      <div id="ob-step-2" class="onboarding-step hidden">
-        <h2>Accessibility Preferences</h2>
-        <p class="auth-subtitle">Personalize your Command Center layout.</p>
-
-        <div class="accessibility-options-grid">
-          <label class="checkbox-option">
-            <input type="checkbox" id="pref-voice-assist" checked>
-            <div class="checkbox-desc">
-              <strong>Voice Assistance</strong>
-              <span>App automatically reads announcements aloud</span>
-            </div>
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" id="pref-large-text">
-            <div class="checkbox-desc">
-              <strong>Large Text Size</strong>
-              <span>Scale text sizing for easy visibility</span>
-            </div>
-          </label>
-          <label class="checkbox-option">
-            <input type="checkbox" id="pref-simplified-mode">
-            <div class="checkbox-desc">
-              <strong>Simplified Mode</strong>
-              <span>Solid panels with minimal animations</span>
-            </div>
-          </label>
-        </div>
-
-        <div class="step-nav-buttons">
-          <button type="button" class="btn btn-secondary" onclick="nextOnboardingStep(1)">Back</button>
-          <button type="button" class="btn btn-primary" onclick="nextOnboardingStep(3)">Next: Sign In</button>
-        </div>
-        <div style="text-align:center;margin-top:12px;">
-          <a href="index.html" class="ob-home-link">Back to Home</a>
-        </div>
-      </div>
-
-      <!-- Step 3: Authentication (Sign In / Register) -->
-      <div id="ob-step-3" class="onboarding-step hidden">
         <div class="auth-tabs">
           <button type="button" id="tab-btn-signin" class="auth-tab-btn active" onclick="switchAuthView('signin')">Sign In</button>
           <button type="button" id="tab-btn-signup" class="auth-tab-btn" onclick="switchAuthView('signup')">Sign Up</button>
         </div>
 
-        <!-- Sign In Form -->
         <form id="auth-signin-form" class="auth-form-panel">
           <div class="form-group">
             <label for="signin-email">Email Address</label>
@@ -93,7 +41,6 @@
           <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">Sign In</button>
         </form>
 
-        <!-- Sign Up Form -->
         <form id="auth-signup-form" class="auth-form-panel hidden">
           <div class="form-group">
             <label for="signup-name">Full Name</label>
@@ -107,27 +54,84 @@
             <label for="signup-password">Password</label>
             <input type="password" id="signup-password" required placeholder="••••••••" minlength="4">
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">Create Account & Log In</button>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">Create Account</button>
         </form>
 
         <div class="auth-divider"><span>OR DEMO LOG IN</span></div>
 
         <div class="demo-logins">
           <button type="button" class="btn btn-secondary" onclick="demoLogin('fan@safeflow.com', 'fan')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-svg" style="margin-right:8px;vertical-align:middle;color:var(--color-primary);"><path d="M12 19V5M5 12h14"/></svg> Fan (Sanjay)
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle;color:var(--color-primary);"><path d="M12 19V5M5 12h14"/></svg>Fan (Sanjay)
           </button>
           <button type="button" class="btn btn-secondary" onclick="demoLogin('staff@safeflow.com', 'staff')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-svg" style="margin-right:8px;vertical-align:middle;color:var(--color-warning);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Officer (Sharma)
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle;color:var(--color-warning);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Officer (Sharma)
           </button>
           <button type="button" class="btn btn-secondary" onclick="demoLogin('admin@safeflow.com', 'admin')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-svg" style="margin-right:8px;vertical-align:middle;color:var(--color-danger);"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.778-7.778zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3-3.5 3.5z"/></svg> Admin (Patel)
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle;color:var(--color-danger);"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.778-7.778zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3-3.5 3.5z"/></svg>Admin (Patel)
           </button>
         </div>
 
-        <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-          <button type="button" class="btn btn-secondary btn-small" onclick="nextOnboardingStep(2)">Back</button>
+        <div style="text-align:center;margin-top:14px;">
           <a href="index.html" class="ob-home-link">Back to Home</a>
         </div>
+      </div>
+
+      <!-- Step 2: Accessibility (language-neutral — icons + bilingual micro-labels) -->
+      <div id="ob-step-2" class="onboarding-step hidden">
+        <div class="ob-step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+
+        <div class="accessibility-options-grid ob-a11y-grid">
+          <label class="checkbox-option ob-a11y-option">
+            <input type="checkbox" id="pref-voice-assist" checked>
+            <div class="ob-a11y-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </div>
+            <span class="ob-a11y-label">Voice <span class="ob-a11y-label-hi">/ आवाज़</span></span>
+          </label>
+          <label class="checkbox-option ob-a11y-option">
+            <input type="checkbox" id="pref-large-text">
+            <div class="ob-a11y-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            </div>
+            <span class="ob-a11y-label">Large <span class="ob-a11y-label-hi">/ बड़ा</span></span>
+          </label>
+          <label class="checkbox-option ob-a11y-option">
+            <input type="checkbox" id="pref-simplified-mode">
+            <div class="ob-a11y-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </div>
+            <span class="ob-a11y-label">Simple <span class="ob-a11y-label-hi">/ सरल</span></span>
+          </label>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-large-onboarding" style="margin-top:20px;" onclick="nextOnboardingStep(3)">
+          Continue →
+        </button>
+      </div>
+
+      <!-- Step 3: Language (final — icons, bilingual, auto-translates enter button) -->
+      <div id="ob-step-3" class="onboarding-step hidden">
+        <div class="ob-step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+
+        <div class="ob-lang-grid">
+          <button type="button" class="ob-lang-btn selected" id="ob-lang-en" onclick="selectOnboardingLanguage('en')">
+            <span class="ob-lang-code">EN</span>
+            <span class="ob-lang-name">English</span>
+          </button>
+          <button type="button" class="ob-lang-btn" id="ob-lang-hi" onclick="selectOnboardingLanguage('hi')">
+            <span class="ob-lang-code">HI</span>
+            <span class="ob-lang-name">हिंदी</span>
+          </button>
+        </div>
+
+        <button type="button" id="btn-enter-app" class="btn btn-primary btn-large-onboarding" style="margin-top:20px;" onclick="completeOnboarding()">
+          Enter SafeFlow
+        </button>
+        <p id="ob-lang-hint" class="ob-lang-hint">You can change this later in Settings.</p>
       </div>
 
     </div>

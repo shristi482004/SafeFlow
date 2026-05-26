@@ -38,60 +38,67 @@ function checkSessionGate() {
   const appView = document.getElementById('app-view');
 
   if (isLoggedIn()) {
-    authView.classList.add('hidden');
-    appView.classList.remove('hidden');
-    
-    // Seed user details
-    const user = getSessionUser();
-    const role = getSessionRole();
-    document.getElementById('active-user-name').textContent = user.name;
-    document.getElementById('user-role-badge').textContent = `${role.toUpperCase()} PORTAL`;
+    if (localStorage.getItem('sf_onboarding_completed') === 'true') {
+      authView.classList.add('hidden');
+      appView.classList.remove('hidden');
+      
+      // Seed user details
+      const user = getSessionUser();
+      const role = getSessionRole();
+      document.getElementById('active-user-name').textContent = user.name;
+      document.getElementById('user-role-badge').textContent = `${role.toUpperCase()} PORTAL`;
 
-    const fanProfileName = document.getElementById('fan-profile-name');
-    if (fanProfileName) fanProfileName.textContent = user.name;
-    const staffProfileName = document.getElementById('staff-profile-name');
-    if (staffProfileName) staffProfileName.textContent = user.name;
-    const staffProfileRole = document.getElementById('staff-profile-role');
-    if (staffProfileRole) staffProfileRole.textContent = role;
+      const fanProfileName = document.getElementById('fan-profile-name');
+      if (fanProfileName) fanProfileName.textContent = user.name;
+      const staffProfileName = document.getElementById('staff-profile-name');
+      if (staffProfileName) staffProfileName.textContent = user.name;
+      const staffProfileRole = document.getElementById('staff-profile-role');
+      if (staffProfileRole) staffProfileRole.textContent = role;
 
-    // Toggle viewport role controls
-    const fanViewport = document.getElementById('fan-viewport');
-    const staffViewport = document.getElementById('staff-viewport');
-    const fanNav = document.getElementById('fan-nav-links');
-    const staffNav = document.getElementById('staff-nav-links');
+      // Toggle viewport role controls
+      const fanViewport = document.getElementById('fan-viewport');
+      const staffViewport = document.getElementById('staff-viewport');
+      const fanNav = document.getElementById('fan-nav-links');
+      const staffNav = document.getElementById('staff-nav-links');
 
-    if (role === 'Fan') {
-      fanViewport.classList.remove('hidden');
-      staffViewport.classList.add('hidden');
-      fanNav.classList.remove('hidden');
-      staffNav.classList.add('hidden');
-      switchTab('fan', 'sos');
-    } else {
-      fanViewport.classList.add('hidden');
-      staffViewport.classList.remove('hidden');
-      fanNav.classList.add('hidden');
-      staffNav.classList.remove('hidden');
-      switchTab('staff', 'monitor');
+      if (role === 'Fan') {
+        fanViewport.classList.remove('hidden');
+        staffViewport.classList.add('hidden');
+        fanNav.classList.remove('hidden');
+        staffNav.classList.add('hidden');
+        switchTab('fan', 'sos');
+      } else {
+        fanViewport.classList.add('hidden');
+        staffViewport.classList.remove('hidden');
+        fanNav.classList.add('hidden');
+        staffNav.classList.remove('hidden');
+        switchTab('staff', 'monitor');
 
-      // Admin Evacuation panel check
-      const adminEvacPanel = document.getElementById('admin-evacuate-panel');
-      if (adminEvacPanel) {
-        if (role === 'Admin') {
-          adminEvacPanel.classList.remove('hidden');
-        } else {
-          adminEvacPanel.classList.add('hidden');
+        // Admin Evacuation panel check
+        const adminEvacPanel = document.getElementById('admin-evacuate-panel');
+        if (adminEvacPanel) {
+          if (role === 'Admin') {
+            adminEvacPanel.classList.remove('hidden');
+          } else {
+            adminEvacPanel.classList.add('hidden');
+          }
         }
       }
-    }
 
-    // Launch loop cycles
-    fetchStadiumState();
-    fetchPredictions();
-    setupMapInteractions(() => currentState);
-    applyLanguage(userLanguage);
+      // Launch loop cycles
+      fetchStadiumState();
+      fetchPredictions();
+      setupMapInteractions(() => currentState);
+      applyLanguage(userLanguage);
+    } else {
+      authView.classList.remove('hidden');
+      appView.classList.add('hidden');
+      window.nextOnboardingStep(2);
+    }
   } else {
     authView.classList.remove('hidden');
     appView.classList.add('hidden');
+    window.nextOnboardingStep(1);
   }
 }
 
@@ -145,7 +152,22 @@ window.setAppTheme = function(theme) {
 
 window.selectOnboardingLanguage = function(lang) {
   setAppLanguage(lang);
-  window.nextOnboardingStep(2); // Goes to accessibility step
+  const enBtn = document.getElementById('ob-lang-en');
+  const hiBtn = document.getElementById('ob-lang-hi');
+  if (enBtn) enBtn.classList.toggle('selected', lang === 'en');
+  if (hiBtn) hiBtn.classList.toggle('selected', lang === 'hi');
+  const enterBtn = document.getElementById('btn-enter-app');
+  const hint = document.getElementById('ob-lang-hint');
+  if (enterBtn) enterBtn.textContent = lang === 'hi' ? 'SafeFlow में प्रवेश करें' : 'Enter SafeFlow';
+  if (hint) hint.textContent = lang === 'hi' ? 'इसे बाद में Settings में बदल सकते हैं।' : 'You can change this later in Settings.';
+};
+
+window.completeOnboarding = function() {
+  if (!localStorage.getItem('sf_lang')) {
+    localStorage.setItem('sf_lang', 'en');
+  }
+  localStorage.setItem('sf_onboarding_completed', 'true');
+  checkSessionGate();
 };
 
 window.nextOnboardingStep = function(stepNum) {

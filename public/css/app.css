@@ -757,36 +757,41 @@ body::before {
 }
 
 .sector-label {
-  fill: #fff;
-  font-weight: 700;
-  font-size: 11px;
+  fill: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
   text-anchor: middle;
   pointer-events: none;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.95));
 }
 
 .sector-density-label {
-  fill: var(--text-muted);
-  font-weight: 600;
-  font-size: 9px;
+  fill: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
   text-anchor: middle;
   pointer-events: none;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.95));
 }
 
 .sector-light-label {
-  fill: var(--text-muted);
-  font-weight: 500;
-  font-size: 8px;
+  fill: #e2e8f0;
+  font-weight: 600;
+  font-size: 10px;
   text-anchor: middle;
   pointer-events: none;
-  opacity: 0.85;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.95));
+  opacity: 0.95;
 }
 
 .field-label {
+  fill: #ffffff;
   font-weight: 800;
-  font-size: 9.5px;
+  font-size: 13px;
   letter-spacing: 2.5px;
   text-anchor: middle;
   pointer-events: none;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.95));
 }
 
 /* Glowing Dijkstra Routing path overlay */
@@ -836,10 +841,11 @@ body::before {
 .map-legend {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  font-size: 9px;
-  color: var(--text-muted);
-  padding: 8px 0;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--text-main);
+  font-weight: 600;
+  padding: 10px 0;
   border-top: 1px solid var(--border-color);
   margin-top: 8px;
 }
@@ -847,13 +853,13 @@ body::before {
 .map-legend span {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .color-box {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
 }
 
 .color-low { background: hsla(171, 100%, 41%, 0.5); border: 1px solid hsl(171, 100%, 41%); }
@@ -1343,13 +1349,124 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
+.ob-step-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--color-primary);
+  opacity: 0.85;
+}
+
+.ob-a11y-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.ob-a11y-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+  text-align: center;
+}
+
+.ob-a11y-option:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-primary-tint);
+}
+
+.ob-a11y-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ob-a11y-icon {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+.ob-a11y-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.ob-a11y-label-hi {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.ob-lang-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+
+.ob-lang-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  text-align: center;
+}
+
+.ob-lang-btn:hover {
+  border-color: oklch(61% 0.14 214 / 0.5);
+  transform: translateY(-1px);
+}
+
+.ob-lang-btn.selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-tint);
+}
+
+.ob-lang-code {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+}
+
+.ob-lang-name {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.ob-lang-btn.selected .ob-lang-code {
+  color: var(--color-primary);
+}
+
+.ob-lang-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
 .btn-large-onboarding {
   padding: 16px;
   font-size: 16px;
   text-align: center;
   border-radius: var(--radius-lg);
   background: var(--color-primary);
-  color: oklch(97% 0.008 158);
+  color: oklch(97% 0.008 214);
   box-shadow: 0 4px 12px var(--color-primary-glow);
   transition: background var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
   display: block;
