@@ -4,5 +4,3 @@ node_modules/
 npm-debug.log
 .execution/
 .env
-# The 'architecture' file (un-extensioned) is superseded by ARCHITECTURE.md
-architecture

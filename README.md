@@ -72,20 +72,10 @@ SafeFlow addresses this by giving operators a live command view with AI-assisted
 
 ## Screenshots
 
-Add screenshots to `assets/screenshots/` using the naming convention below.
-
-| File | Content |
-|---|---|
-| `01-landing.png` | Landing page (index.html) |
-| `02-login.png` | Auth screen with demo credentials |
-| `03-fan-sos.png` | Fan SOS trigger form |
-| `04-fan-sos-active.png` | Active SOS card: Issue Resolved / Need More Help / status badge |
-| `05-fan-route.png` | Safe route result with SVG path overlay |
-| `06-staff-monitor.png` | Staff monitor: live map + incident feed |
-| `07-staff-approvals.png` | Human-in-the-loop approval gate |
-| `08-agent-pipeline.png` | Agent reasoning panel with animated pipeline dots |
-| `09-voice-hindi.png` | Voice assistant in Hindi mode |
-| `10-dark-light.png` | Dark / light theme side-by-side |
+<!-- Screenshots: paste images inline below. Suggested order:
+  Landing  →  Login  →  Fan SOS  →  SOS Active card  →  Safe route
+  Staff monitor  →  Approval gate  →  Agent pipeline  →  Voice Hindi  →  Dark/light theme
+-->
 
 ---
 
@@ -188,9 +178,6 @@ safeflow/
 │
 ├── tests/
 │   └── api.test.js            # Node built-in test runner
-│
-├── assets/
-│   └── screenshots/           # UI screenshots (add per naming convention above)
 │
 ├── ARCHITECTURE.md            # Full architecture: diagrams, data flows, Dijkstra
 ├── DESIGN.md                  # Design system reference: colors, tokens, components
