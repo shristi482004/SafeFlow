@@ -40,7 +40,7 @@ Communicates clearly, reduces stress, guides users through situations confidentl
 
 ## Accessibility & Inclusion
 
-- Multilingual: en-IN, hi-IN, ta-IN, te-IN (voice + text)
+- Multilingual: en-IN, hi-IN
 - Large text mode (user-selectable)
 - Simplified interface mode (reduced information density for fans)
 - Dark and light themes (persistent, user preference)
