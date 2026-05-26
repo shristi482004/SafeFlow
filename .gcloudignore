@@ -1,0 +1,8 @@
+# gcloud ignore file
+node_modules/
+.git/
+.execution/
+artifacts/
+.gemini/
+.DS_Store
+npm-debug.log
