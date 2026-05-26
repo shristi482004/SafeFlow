@@ -2214,9 +2214,111 @@ body.theme-light .theme-btn.active {
   color: oklch(97% 0.008 158);
 }
 
-body.theme-light .sector-density-label {
-  fill: var(--text-muted);
+/* Light mode stadium SVG overrides */
+body.theme-light .stadium-map-wrapper {
+  background: rgba(255, 252, 244, 0.45) !important;
+  border-color: rgba(55, 45, 30, 0.12) !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
 }
+
+body.theme-light .sector-path {
+  stroke-width: 1.5px;
+}
+
+body.theme-light .sector-low {
+  fill: hsla(171, 35%, 60%, 0.3) !important;
+  stroke: hsl(171, 40%, 45%) !important;
+}
+
+body.theme-light .sector-med {
+  fill: hsla(48, 55%, 72%, 0.3) !important;
+  stroke: hsl(48, 50%, 52%) !important;
+}
+
+body.theme-light .sector-high {
+  fill: hsla(348, 50%, 72%, 0.3) !important;
+  stroke: hsl(348, 45%, 52%) !important;
+}
+
+body.theme-light .sector-alert-active {
+  animation: pulse-sector-alert-light 1.5s infinite !important;
+}
+
+@keyframes pulse-sector-alert-light {
+  0%   { fill: oklch(43% 0.17 12 / 0.2) !important; stroke: oklch(43% 0.17 12) !important; }
+  50%  { fill: oklch(43% 0.17 12 / 0.5) !important; stroke: oklch(43% 0.17 12) !important; }
+  100% { fill: oklch(43% 0.17 12 / 0.2) !important; stroke: oklch(43% 0.17 12) !important; }
+}
+
+body.theme-light .stadium-svg ellipse[stroke*="rgba(255,255,255,0.06)"],
+body.theme-light .stadium-svg ellipse[stroke*="rgba(255, 255, 255, 0.06)"] {
+  stroke: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.theme-light .stadium-svg line[stroke*="rgba(255"] {
+  stroke: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light .stadium-svg ellipse[fill="rgba(0,0,0,0.5)"] {
+  fill: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.theme-light .stadium-svg ellipse[stroke*="rgba(255,255,255,0.03)"],
+body.theme-light .stadium-svg ellipse[stroke*="rgba(255, 255, 255, 0.03)"] {
+  stroke: rgba(0, 0, 0, 0.02) !important;
+}
+
+body.theme-light .stadium-svg ellipse[stroke*="rgba(0,180,216"],
+body.theme-light .stadium-svg ellipse[stroke*="oklch"] {
+  stroke: var(--color-primary) !important;
+  opacity: 0.35 !important;
+}
+
+/* Light mode label visibility */
+body.theme-light .sector-label {
+  fill: var(--text-main) !important;
+  font-weight: 800 !important;
+  filter: drop-shadow(0px 1px 1px #ffffff) drop-shadow(0px 1px 2px #ffffff) !important;
+}
+
+body.theme-light .sector-density-label {
+  fill: var(--text-main) !important;
+  font-weight: 700 !important;
+  filter: drop-shadow(0px 1px 1px #ffffff) drop-shadow(0px 1px 2px #ffffff) !important;
+}
+
+body.theme-light .sector-light-label {
+  fill: var(--text-muted) !important;
+  font-weight: 600 !important;
+  filter: drop-shadow(0px 1px 1px #ffffff) drop-shadow(0px 1px 2px #ffffff) !important;
+  opacity: 0.95 !important;
+}
+
+body.theme-light .field-label {
+  fill: var(--color-primary) !important;
+  font-weight: 800 !important;
+  filter: drop-shadow(0px 1px 1px #ffffff) drop-shadow(0px 1px 2px #ffffff) !important;
+}
+
+/* Light mode legend colors override */
+body.theme-light .color-low {
+  background: hsla(171, 35%, 60%, 0.3) !important;
+  border: 1px solid hsl(171, 40%, 45%) !important;
+}
+body.theme-light .color-med {
+  background: hsla(48, 55%, 72%, 0.3) !important;
+  border: 1px solid hsl(48, 50%, 52%) !important;
+}
+body.theme-light .color-high {
+  background: hsla(348, 50%, 72%, 0.3) !important;
+  border: 1px solid hsl(348, 45%, 52%) !important;
+}
+body.theme-light .color-alert {
+  background: oklch(43% 0.17 12 / 0.2) !important;
+  border: 1px solid oklch(43% 0.17 12) !important;
+}
+
 
 body.theme-light .btn-filter {
   background: rgba(55, 45, 30, 0.05);
