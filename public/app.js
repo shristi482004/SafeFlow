@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (gEl) gEl.addEventListener('click', () => handleGuidedSectorClick(id));
   });
 
-  runAgentAnalysis(null, null, null, null);
+  runAgentAnalysis(null, null, null, null, true);
   setInterval(fetchPredictions, 10000);
   setTimeout(fetchPredictions, 2000);
   // Live state refresh every 8 seconds to keep map current
@@ -372,7 +372,7 @@ function setPipelineDots(stage) {
   if (label) label.textContent = labels[stage] || 'Ready';
 }
 
-async function runAgentAnalysis(incidentObj, startSector, destSector, userType) {
+async function runAgentAnalysis(incidentObj, startSector, destSector, userType, silent = false) {
   const loadingEl = document.getElementById('agent-loading');
   loadingEl.classList.remove('hidden');
   setPipelineDots(0);
@@ -386,7 +386,7 @@ async function runAgentAnalysis(incidentObj, startSector, destSector, userType) 
     updateAgentUI(result);
     if (result.suggestedRoute) {
       renderRouteOnMap(result.suggestedRoute);
-      showToast('Route Calculated', result.suggestedRoute.pathDescription, 'toast-success');
+      if (!silent) showToast('Route Calculated', result.suggestedRoute.pathDescription, 'toast-success');
     } else hideRouteLine();
 
     // Auto-speak public announcement when there's an active incident
@@ -396,8 +396,8 @@ async function runAgentAnalysis(incidentObj, startSector, destSector, userType) 
 
     // Human approval gate
     if (result.pendingApproval && incidentObj) showApprovalModal(result);
-    if (result.reEvaluated) showToast('Re-Evaluated', 'Agent confidence was low. Parameters adjusted.', 'toast-warning');
-  } catch(e) { showToast('Analysis Error', 'Multi-agent pipeline failed.', 'toast-danger'); }
+    if (!silent && result.reEvaluated) showToast('Re-Evaluated', 'Agent confidence was low. Parameters adjusted.', 'toast-warning');
+  } catch(e) { if (!silent) showToast('Analysis Error', 'Multi-agent pipeline failed.', 'toast-danger'); }
   finally { loadingEl.classList.add('hidden'); }
 }
 
