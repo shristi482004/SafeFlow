@@ -76,6 +76,43 @@ SafeFlow addresses this by giving operators a live command view with AI-assisted
   Landing  →  Login  →  Fan SOS  →  SOS Active card  →  Safe route
   Staff monitor  →  Approval gate  →  Agent pipeline  →  Voice Hindi  →  Dark/light theme
 -->
+### Landing
+<img width="1470" height="768" alt="image" src="https://github.com/user-attachments/assets/7944cafa-4188-4ade-a5b7-16663f830b62" />
+<img width="1470" height="603" alt="image" src="https://github.com/user-attachments/assets/a47a1b2c-77c3-4e91-8ebc-a81ca75f7fea" />
+<img width="1470" height="603" alt="image" src="https://github.com/user-attachments/assets/1d624940-d85f-4154-81e4-616146f73ae5" />
+<img width="1470" height="675" alt="image" src="https://github.com/user-attachments/assets/3d7f8f62-b1ff-440e-86ca-eb8d68368222" />
+<img width="1470" height="626" alt="image" src="https://github.com/user-attachments/assets/29befe85-c05d-48da-b1c7-0a6ac78b7e2f" />
+<img width="1470" height="584" alt="image" src="https://github.com/user-attachments/assets/2e7505fe-cd57-4101-bd1c-bd5096410454" />
+
+
+
+### Onboarding
+<img width="1470" height="603" alt="image" src="https://github.com/user-attachments/assets/ce9b0a8f-65ab-45b4-92ac-975b06dc361f" />
+<img width="1470" height="755" alt="image" src="https://github.com/user-attachments/assets/0c355026-bd85-4de7-be4c-ce7ed72061ac" />
+<img width="1470" height="755" alt="image" src="https://github.com/user-attachments/assets/7fbab6bf-bc65-464c-a7e9-10e4e038f7dc" />
+<img width="1470" height="755" alt="image" src="https://github.com/user-attachments/assets/986df239-d305-4a70-adaa-30944eaa4de6" />
+
+
+### Fan-side view
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/8c9d799d-7b33-4450-871e-892412cfaeea" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/331b1c63-ab11-4023-b21f-5c8ad69a7714" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/42621fcb-7bde-4a83-8e26-c999554befeb" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/c35a5672-e531-4cec-bbec-8b69e3e0d87d" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/b171065d-e9fc-465e-ae88-2ff875aa3add" />
+
+### Officer-side view
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/24a88ffd-cdd1-4fe2-ba8e-41659478b117" />
+
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/75bc52c0-f4c2-4c95-86f8-00c9dc6e1998" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/278d8d58-5a32-4bf4-968a-b9ef41027931" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/7fb1154c-b0cb-4032-85fa-fceed91ce47c" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/c053b3eb-ccf9-4d24-8a50-7e16f6e944c9" />
+
+### Administator-side view(Extra authorisation)
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/77adcd2f-a816-4977-a19e-c9e214912f4d" />
+<img width="1470" height="816" alt="image" src="https://github.com/user-attachments/assets/86077132-a026-4945-9270-3908b6acebea" />
+
+
 
 ---
 
