@@ -6,7 +6,7 @@
   <title>SafeFlow — AI Stadium Safety Command Center</title>
   <meta name="description" content="AI-powered multi-agent stadium safety command center with real-time crowd monitoring, predictive analytics, and voice-guided accessibility.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230a0f1e'/><path d='M50 15 L80 35 V65 L50 85 L20 65 V35Z' fill='none' stroke='%2300b4d8' stroke-width='5'/><circle cx='50' cy='50' r='12' fill='%2300b4d8'/></svg>">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/landing.css">
   <!-- Google Fonts: Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,707 +14,224 @@
 </head>
 <body>
 
-  <!-- Onboarding Overlay -->
-  <div class="onboarding-overlay" id="onboarding-overlay">
-    <div class="onboarding-card">
-      <div class="onboarding-badge">SafeFlow AI</div>
-      <h2>Stadium Safety Command Center</h2>
-      <p>Three AI agents work together to observe, reason, and coordinate real-time safety operations for 50,000+ stadium attendees.</p>
-      <div class="onboarding-features">
-        <div class="onboarding-feature"><strong>Observe</strong><br>Live crowd density and incident monitoring</div>
-        <div class="onboarding-feature"><strong>Reason</strong><br>AI-powered resource allocation and routing</div>
-        <div class="onboarding-feature"><strong>Act</strong><br>Announcements in your language</div>
-      </div>
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-primary);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      SafeFlow
+    </div>
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#safety-layer">Safety Layer</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="app.html" class="btn-header" id="btn-header-launch">Launch App</a>
+  </header>
 
-      <div style="margin-top:20px;">
-        <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Choose Language / भाषा चुनें</p>
-        <div class="lang-selector" id="onboarding-lang-selector" style="margin-bottom:15px;">
-          <button class="lang-btn active" data-lang="en" onclick="selectOnboardingLang(this)">English</button>
-          <button class="lang-btn" data-lang="hi" onclick="selectOnboardingLang(this)">हिंदी</button>
-        </div>
-      </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-tag">AI Stadium Safety Command Center</div>
+    <h1>Observe. Reason. Coordinate.<br>Real-Time Stadium Safety.</h1>
+    <p>A multi-agent AI system that monitors crowd density, resolves safety hazard bottlenecks, and broadcasts instructions in English and Hindi to protect 50,000+ stadium attendees.</p>
+    <div class="hero-ctas">
+      <a href="app.html" class="btn btn-primary" id="btn-hero-launch">Launch Safety Portal</a>
+      <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+    </div>
+  </section>
 
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <button class="btn btn-primary" id="btn-dismiss-operator" style="width:100%;font-size:15px;padding:12px;">Enter as Control Room Operator (Staff)</button>
-        <button class="btn btn-secondary" id="btn-dismiss-attendee" style="width:100%;font-size:15px;padding:12px;border:1px solid rgba(255,255,255,0.15);">Enter as Stadium Attendee (Fan)</button>
+  <!-- Problem Section -->
+  <section id="problem" class="split-view" style="border-top:1px solid var(--border-color);padding-top:100px;">
+    <div class="split-desc">
+      <div class="hero-tag" style="background:rgba(239,71,111,0.1);color:#ef476f;">The Challenge</div>
+      <h3>The Chaos of Stadium Incidents</h3>
+      <p>Stadiums are highly volatile environments. When emergencies strike—be it a crowd surge, medical collapse, missing child, or women's safety SOS—operators are overwhelmed with disparate telemetry, while attendees face language barriers and low-light areas.</p>
+      <p>SafeFlow resolves this complexity by orchestrating three specialized AI agents to establish situational awareness, calculate safety routing, and generate immediate, multilingual public updates.</p>
+    </div>
+    <div class="split-graphic">
+      <div class="dijkstra-map">
+        <div style="color:var(--color-primary);margin-bottom:8px;">// TELEMETRY CONGESTION LOG</div>
+        Sector D (Gate 4 Entrance): 95% Density (ALERT)<br>
+        Sector E (West Stand): Low Lighting, 2 Guards<br>
+        <span style="color:#ef476f;">[EVENT] Priority Women SOS in Sector E!</span><br><br>
+        <span style="color:#fff;">[RESOLVING DYNAMIC ROUTING PATH...]</span><br>
+        Start: Sector E (Low Light)<br>
+        Dest: Sector A (VIP Safe Haven)<br>
+        Path: Sector E -> Sector F -> Sector A (Safest edge weight)<br>
+        <span style="color:var(--color-primary);">Status: Dijkstra Solved (Incidents & low-light bypassed)</span>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Toast Container -->
-  <div class="toast-container" id="toast-container"></div>
-
-  <!-- Human Approval Modal -->
-  <div class="approval-modal hidden" id="approval-modal">
-    <div class="approval-card">
-      <div class="approval-header">Human-in-the-Loop Approval Required</div>
-      <p class="approval-risk" id="approval-risk-level">Risk Level: Critical</p>
-      <div class="approval-action" id="approval-action-text">Immediate Steward Dispatch and Escort to Sector A safe zone.</div>
-      <div class="approval-resources" id="approval-resources"></div>
-      <div class="approval-buttons">
-        <button class="btn btn-primary" id="btn-approve" style="flex:1;">Approve Action</button>
-        <button class="btn btn-outline" id="btn-override" style="flex:1;">Override</button>
-      </div>
-      <p class="approval-note">Agent 3 (Communication) will execute after approval.</p>
+  <!-- How It Works Section -->
+  <section id="how-it-works" style="border-top:1px solid var(--border-color);padding-top:100px;">
+    <div class="section-header">
+      <div class="hero-tag">The Pipeline</div>
+      <h2>Orchestrated Agent Intelligence</h2>
+      <p>Three autonomous AI Agents collaborate sequentially to process incidents and generate safety responses.</p>
     </div>
-  </div>
-
-  <!-- App Container -->
-  <div class="app-container">
-    
-    <!-- Top Navigation Bar -->
-    <header class="app-header">
-      <div class="logo-area">
-        <span class="pulse-indicator status-green" id="system-pulse"></span>
-        <div class="logo-text">
-          <h1>SafeFlow</h1>
-          <span class="logo-subtext">STADIUM SAFETY COMMAND CENTER</span>
-        </div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-num">1</div>
+        <h3>Observe (Agent 1)</h3>
+        <p style="margin-top:10px;font-size:14px;color:var(--text-muted);">The **Awareness Agent** analyzes live sector telemetry (crowd levels, lighting, guards) to calculate risk metrics, categories, and key observations.</p>
       </div>
-      
-      <!-- Quick Dashboard Status Metrics -->
-      <div class="header-metrics">
-        <div class="metric-badge clickable-badge" id="badge-active-incidents" role="button" tabindex="0" aria-label="View active incidents list" style="cursor:pointer;transition:background-color 0.2s;">
-          <span class="badge-label">Active Incidents</span>
-          <span class="badge-value warning-text" id="active-incidents-count">0</span>
-        </div>
-        <div class="metric-badge">
-          <span class="badge-label">Max Crowd Sector</span>
-          <span class="badge-value" id="max-density-sector">Sector D (95%)</span>
-        </div>
-        <div class="metric-badge">
-          <span class="badge-label">Security Status</span>
-          <span class="badge-value success-text">Active</span>
-        </div>
-        <button class="btn btn-secondary btn-auto-demo" id="btn-auto-demo" style="font-size:13px;margin-right:8px;padding:5px 10px;" aria-label="Watch automated demo">Watch Demo</button>
-        <button class="btn btn-outline" id="btn-toggle-protocol" style="font-size: 14px; margin-right: 8px; padding: 6px 12px;" aria-label="Toggle AI Protocol Panel">AI Protocol</button>
-        <button class="btn btn-outline" id="btn-toggle-view" style="font-size: 14px; margin-right: 15px; padding: 6px 12px;" aria-label="Switch to Spectator App">Switch to Spectator App</button>
-        <div class="clock-display" id="live-clock">10:44:34 AM</div>
+      <div class="timeline-step">
+        <div class="timeline-num">2</div>
+        <h3>Reason (Agent 2)</h3>
+        <p style="margin-top:10px;font-size:14px;color:var(--text-muted);">The **Decision Agent** designs a resource coordination plan (stewards, EMTs, police) and logs safety action items, subject to operator approval.</p>
       </div>
-    </header>
-
-    <!-- Main Content Layout -->
-    <main class="dashboard-grid" id="dashboard-view">
-      
-      <!-- Column 1: Incident Control, SOS, and Safe Routing -->
-      <section class="control-panel panel-glass">
-        
-        <!-- Women Safety SOS Section (Priority) -->
-        <div class="card sos-card">
-          <div class="card-header">
-            <h2>Women Safety SOS Panel</h2>
-          </div>
-          <p class="card-desc">Instantly trigger priority response and generate a safe haven rescue route for solo women attendees.</p>
-          
-          <div class="form-group">
-            <label for="sos-sector">Select SOS Sector Location:</label>
-            <select id="sos-sector">
-              <option value="E">Sector E (West Stand - Low Light)</option>
-              <option value="B">Sector B (East Stand)</option>
-              <option value="C">Sector C (North Stand)</option>
-              <option value="D">Sector D (Gate 4 Entrance)</option>
-              <option value="F">Sector F (Family Zone)</option>
-            </select>
-          </div>
-          
-          <button class="btn btn-danger btn-pulse" id="btn-sos-trigger">
-            TRIGGER PRIORITY SOS
-          </button>
-        </div>
-
-        <!-- Safe Route Generator Card -->
-        <div class="card routing-card">
-          <div class="card-header">
-            <h2>Safe Route Generator</h2>
-          </div>
-          <p class="card-desc">Optimize pedestrian routing to avoid bottlenecks, low lighting, or active risk zones based on attendee profile.</p>
-          
-          <div class="routing-inputs">
-            <div class="form-group">
-              <label for="route-start">Starting Sector:</label>
-              <select id="route-start">
-                <option value="E">Sector E (West Stand)</option>
-                <option value="B" selected>Sector B (East Stand)</option>
-                <option value="C">Sector C (North Stand)</option>
-                <option value="D">Sector D (Gate 4)</option>
-                <option value="A">Sector A (VIP)</option>
-                <option value="F">Sector F (Family Zone)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="route-dest">Destination Sector:</label>
-              <select id="route-dest">
-                <option value="A" selected>Sector A (VIP / Safe Haven)</option>
-                <option value="F">Sector F (Family Zone)</option>
-                <option value="D">Sector D (Gate 4)</option>
-                <option value="C">Sector C (North Stand)</option>
-                <option value="B">Sector B (East Stand)</option>
-                <option value="E">Sector E (West Stand)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="route-profile">User Safety Profile:</label>
-              <select id="route-profile">
-                <option value="woman">Solo Woman Attendee (High Priority)</option>
-                <option value="elderly">Elderly / Accessible User</option>
-                <option value="child">Child / Family Group</option>
-                <option value="general">General Public</option>
-              </select>
-            </div>
-          </div>
-
-          <button class="btn btn-primary" id="btn-calculate-route">
-            CALCULATE SAFE PATH
-          </button>
-
-          <!-- Safe Route Outputs -->
-          <div class="route-result-container hidden" id="route-results">
-            <div class="result-divider"></div>
-            <h3>Generated Safety Path</h3>
-            <div class="path-badge" id="route-path-output">Sector B → Sector A</div>
-            
-            <div class="route-metrics">
-              <div class="route-metric-item">
-                <span class="rm-label">Crowd Level</span>
-                <span class="rm-val" id="route-crowd-rating">Moderate</span>
-              </div>
-              <div class="route-metric-item">
-                <span class="rm-label">Lighting Level</span>
-                <span class="rm-val" id="route-lighting-level">High/Medium</span>
-              </div>
-            </div>
-
-            <div class="route-alert-box warning-box hidden" id="route-warnings-container">
-              <strong>Safety Advisories:</strong>
-              <ul id="route-warnings-list">
-                <!-- Warnings dynamically generated -->
-              </ul>
-            </div>
-            
-            <div class="route-alert-box success-box hidden" id="route-escort-container">
-              Safe Haven reached. Auxiliary security escort dispatched.
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- Column 2: Simulated Stadium Map and Live Operations Feed -->
-      <section class="stadium-panel panel-glass">
-        
-        <!-- Stadium Map Visualizer -->
-        <div class="card map-card">
-          <div class="card-header">
-            <h2>Stadium Interactive Monitor</h2>
-            <span class="live-tag">LIVE MAP</span>
-          </div>
-          
-          <div class="stadium-map-wrapper">
-            <!-- Simulated Stadium SVG -->
-            <svg id="stadium-svg" viewBox="0 0 600 450" class="stadium-svg">
-              <defs>
-                <radialGradient id="glow-sos" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(255, 0, 85, 0.4)"/>
-                  <stop offset="100%" stop-color="rgba(255, 0, 85, 0)"/>
-                </radialGradient>
-              </defs>
-              <!-- Outer Stadium Ring -->
-              <rect class="stadium-outer" x="10" y="10" width="580" height="430" rx="215" fill="none" stroke="#2a2f45" stroke-width="4"/>
-              
-              <!-- Sector Stands -->
-              <!-- Sector A: VIP Stand (Top Center) -->
-              <path id="sector-A" class="sector-path sector-low" d="M 180,60 L 420,60 L 410,130 L 190,130 Z" />
-              <text x="300" y="100" class="sector-label">A (VIP)</text>
-              <text x="300" y="115" class="sector-density-label" id="density-A">42%</text>
-
-              <!-- Sector B: East Stand (Right Top) -->
-              <path id="sector-B" class="sector-path sector-med" d="M 430,70 L 530,170 L 470,220 L 410,140 Z" />
-              <text x="455" y="150" class="sector-label">B (East)</text>
-              <text x="455" y="165" class="sector-density-label" id="density-B">82%</text>
-
-              <!-- Sector C: North Stand (Right Bottom) -->
-              <path id="sector-C" class="sector-path sector-med" d="M 530,190 L 470,230 L 410,310 L 430,380 Z" />
-              <text x="455" y="300" class="sector-label">C (North)</text>
-              <text x="455" y="315" class="sector-density-label" id="density-C">88%</text>
-
-              <!-- Sector D: Gate 4 (Bottom Center) -->
-              <path id="sector-D" class="sector-path sector-high" d="M 420,390 L 180,390 L 190,320 L 410,320 Z" />
-              <text x="300" y="355" class="sector-label">D (Gate 4)</text>
-              <text x="300" y="370" class="sector-density-label" id="density-D">95%</text>
-
-              <!-- Sector E: West Stand (Left Bottom) -->
-              <path id="sector-E" class="sector-path sector-med" d="M 170,380 L 70,280 L 130,230 L 190,310 Z" />
-              <text x="145" y="300" class="sector-label">E (West)</text>
-              <text x="145" y="315" class="sector-density-label" id="density-E">78%</text>
-
-              <!-- Sector F: Family Zone (Left Top) -->
-              <path id="sector-F" class="sector-path sector-low" d="M 70,170 L 170,70 L 190,140 L 130,220 Z" />
-              <text x="145" y="150" class="sector-label">F (Family)</text>
-              <text x="145" y="165" class="sector-density-label" id="density-F">65%</text>
-
-              <!-- Central Playfield -->
-              <ellipse cx="300" cy="225" rx="140" ry="80" class="playfield" />
-              <text x="300" y="230" class="field-label">CRICKET FIELD</text>
-
-              <!-- Safe route line representation -->
-              <polyline id="route-line" class="route-line-svg hidden" points="" />
-            </svg>
-          </div>
-          
-          <div class="map-legend">
-            <span class="legend-item"><span class="color-box color-low"></span> Low Density (&lt;50%)</span>
-            <span class="legend-item"><span class="color-box color-med"></span> Medium Density (50-80%)</span>
-            <span class="legend-item"><span class="color-box color-high"></span> High Density (&gt;80%)</span>
-            <span class="legend-item"><span class="color-box color-alert"></span> Incident Active</span>
-          </div>
-        </div>
-
-        <!-- Predictive Forecast Card -->
-        <div class="card forecast-card">
-          <div class="card-header">
-            <h2>Crowd Forecast</h2>
-            <span class="live-tag">AI PREDICTION</span>
-          </div>
-          <p class="card-desc" id="match-context">Loading match context...</p>
-          <div class="forecast-grid" id="forecast-grid"></div>
-          <div class="sparkline-container">
-            <h3 style="margin-bottom:8px;font-size:13px;color:var(--text-muted);">Density Trends (Last 3 min)</h3>
-            <canvas id="sparkline-canvas" width="540" height="80"></canvas>
-          </div>
-        </div>
-
-        <!-- Incident Presets (Operational Speed) -->
-        <div class="card presets-card">
-          <div class="card-header">
-            <h2>Incident Presets (Judge Testing)</h2>
-          </div>
-          <div class="presets-grid">
-            <button class="btn btn-secondary" onclick="simulateIncident('crowd_surge', 'D')">
-              Gate 4 Crowd Surge
-            </button>
-            <button class="btn btn-secondary" onclick="simulateIncident('medical_emergency', 'B')">
-              Sector B Medical distress
-            </button>
-            <button class="btn btn-secondary" onclick="simulateIncident('lost_child', 'F')">
-              Sector F Lost Child
-            </button>
-            <button class="btn btn-danger" onclick="simulateIncident('security_breach', 'D')" style="grid-column: span 2;">
-              Security Breach (Evacuate)
-            </button>
-            <button class="btn btn-outline" onclick="simulateIncident('clear')" style="grid-column: span 2;">
-              Clear All Incidents
-            </button>
-          </div>
-        </div>
-
-        <!-- Operations Console Feed -->
-        <div class="card console-card">
-          <div class="card-header">
-            <h2>Operations Feed</h2>
-          </div>
-          <div class="console-feed" id="console-logs">
-            <div class="log-entry log-system">[08:00:00 AM] SafeFlow Command Center system initialized.</div>
-            <div class="log-entry log-system">[08:05:00 AM] Dynamic Sector sensors connected. Ground stewards online.</div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- Column 3: Multi-Agent Explainability Core -->
-      <section class="agent-panel panel-glass hidden" id="agent-panel">
-        <div class="agent-header-sticky">
-          <span class="panel-tag">AI THINKING PROTOCOL</span>
-          <h2>Multi-Agent SafeFlow Pipeline</h2>
-          <p class="panel-desc">Three autonomous agents collaborate in real-time to observe, reason, and communicate safety actions.</p>
-          <div class="agent-pipeline-status" id="agent-pipeline-bar" aria-label="Agent pipeline status">
-            <span class="pipeline-dot done" id="pdot-1" title="Awareness Agent"></span>
-            <span class="pipeline-line"></span>
-            <span class="pipeline-dot" id="pdot-2" title="Decision Agent"></span>
-            <span class="pipeline-line"></span>
-            <span class="pipeline-dot" id="pdot-3" title="Communication Agent"></span>
-            <span style="margin-left:6px;font-size:10px;" id="pipeline-label">Ready</span>
-          </div>
-        </div>
-
-        <!-- Loading overlay -->
-        <div id="agent-loading" class="agent-loading hidden">
-          <div class="spinner"></div>
-          <p>Orchestrating agents via Gemini API...</p>
-        </div>
-
-        <div id="agents-response-container">
-          
-          <!-- Agent 1: Awareness -->
-          <div class="agent-card" id="agent-card-1">
-            <div class="agent-title-bar">
-              <span class="agent-badge badge-observe">AGENT 1</span>
-              <h3>Awareness Agent (Observe)</h3>
-            </div>
-            
-            <div class="agent-output-block">
-              <div class="risk-meter-container">
-                <span class="risk-lbl">System Risk:</span>
-                <span class="risk-badge risk-low" id="agent1-risk-badge">Low</span>
-                <div class="risk-progress-bg">
-                  <div class="risk-progress-bar" id="agent1-risk-progress" style="width: 15%"></div>
-                </div>
-              </div>
-
-              <div class="output-row">
-                <strong>Observations:</strong>
-                <ul class="bullet-list" id="agent1-observations">
-                  <li>Stadium density is at baseline 72% average.</li>
-                  <li>No active triggers in the queue.</li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Explainability Toggles -->
-            <div class="accordion">
-              <details>
-                <summary>Agent 1 Reasoning & Explanation</summary>
-                <div class="details-content" id="agent1-reasoning">
-                  The stadium layout parameters indicate standard seating patterns with average ingress velocity. Risk rating is baseline low.
-                </div>
-              </details>
-              <details>
-                <summary>Agent 1 Fallback Protocol</summary>
-                <div class="details-content" id="agent1-fallback">
-                  Fallback: Continue polling digital ticket gates every 5 minutes.
-                </div>
-              </details>
-            </div>
-          </div>
-
-          <!-- Agent 2: Decision -->
-          <div class="agent-card" id="agent-card-2">
-            <div class="agent-title-bar">
-              <span class="agent-badge badge-reason">AGENT 2</span>
-              <h3>Decision Agent (Reason / Coordinate)</h3>
-            </div>
-
-            <div class="agent-output-block">
-              <div class="output-row">
-                <strong>Primary Action Plan:</strong>
-                <p id="agent2-primary-response" class="response-text">Standard monitoring. Verify security guard placements at exits.</p>
-              </div>
-
-              <div class="resources-grid">
-                <div class="resource-badge">
-                  <span class="res-num" id="res-stewards">25</span>
-                  <span class="res-lbl">Stewards</span>
-                </div>
-                <div class="resource-badge">
-                  <span class="res-num" id="res-medical">2</span>
-                  <span class="res-lbl">Medical</span>
-                </div>
-                <div class="resource-badge">
-                  <span class="res-num" id="res-police">5</span>
-                  <span class="res-lbl">Police</span>
-                </div>
-              </div>
-
-              <div class="output-row">
-                <strong>Escalation Protocol:</strong>
-                <ol class="ordered-list" id="agent2-escalation">
-                  <li>Deploy general standby volunteers.</li>
-                  <li>Review entry/exit bottlenecks.</li>
-                </ol>
-              </div>
-            </div>
-
-            <!-- Explainability Toggles -->
-            <div class="accordion">
-              <details>
-                <summary>Agent 2 Reasoning & Explanation</summary>
-                <div class="details-content" id="agent2-reasoning">
-                  Allocated resources reflect standard operations. A minimal footprint is kept to optimize coordinator coverage across all outer zones.
-                </div>
-              </details>
-              <details>
-                <summary>Agent 2 Fallback Protocol</summary>
-                <div class="details-content" id="agent2-fallback">
-                  Fallback: Standard manual shift change protocol.
-                </div>
-              </details>
-            </div>
-          </div>
-
-          <!-- Agent 3: Communication -->
-          <div class="agent-card" id="agent-card-3">
-            <div class="agent-title-bar">
-              <span class="agent-badge badge-act">AGENT 3</span>
-              <h3>Communication Agent (Act / Explain)</h3>
-            </div>
-
-            <div class="agent-output-block">
-              <div class="output-row">
-                <strong>Public Address (PA) Script:</strong>
-                <div class="comm-box pa-text" id="agent3-pa">
-                  "Welcome to the stadium! Exit routes are fully clear. Enjoy the match and proceed safely."
-                </div>
-              </div>
-
-              <div class="output-row">
-                <strong>Direct User SMS Broadcast:</strong>
-                <div class="comm-box sms-text" id="agent3-sms">
-                  "SafeFlow Alert: All routes are currently normal. Report any safety concerns to the nearest steward."
-                </div>
-              </div>
-
-              <div class="output-row">
-                <strong>Steward Ground Orders:</strong>
-                <div class="comm-box steward-text" id="agent3-stewards">
-                  "Perform perimeter scans and maintain queue organization at gates."
-                </div>
-              </div>
-            </div>
-
-            <!-- Explainability Toggles -->
-            <div class="accordion">
-              <details>
-                <summary>Agent 3 Reasoning & Explanation</summary>
-                <div class="details-content" id="agent3-reasoning">
-                  Messages are formulated to keep stadium noise and crowd anxiety levels low while providing necessary standard routing information.
-                </div>
-              </details>
-              <details>
-                <summary>Agent 3 Fallback Protocol</summary>
-                <div class="details-content" id="agent3-fallback">
-                  Fallback: Utilize megaphone audio templates at Gate entrances.
-                </div>
-              </details>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-    </main>
-
-    <!-- Guided Assistant Mode View -->
-    <main class="guided-grid hidden" id="guided-view">
-
-      <!-- Language Switcher -->
-      <div class="guided-mode-header">
-        <h3>SafeFlow Assistant <span class="lang-indicator" id="guided-lang-badge">EN</span></h3>
-        <div class="lang-selector" id="guided-lang-selector">
-          <button class="lang-btn active" data-lang="en" onclick="setUserLanguage('en')" aria-label="Switch to English">English</button>
-          <button class="lang-btn" data-lang="hi" onclick="setUserLanguage('hi')" aria-label="हिंदी में बदलें">हिंदी</button>
-        </div>
-      </div>
-
-      <!-- Top banner for status -->
-      <section class="guided-status status-safe panel-glass" id="guided-status-section">
-        <h2 id="guided-status-banner">The stadium is safe. Proceed to your seats.</h2>
-        <p id="guided-status-desc">SafeFlow Safety Assistant is active and monitoring crowd conditions.</p>
-      </section>
-
-      <!-- Stadium Map Visualizer for Spectator -->
-      <div class="card map-card panel-glass" style="align-items:center;background:var(--bg-card);border:1px solid var(--border-color);padding:24px;border-radius:12px;">
-        <div class="card-header" style="width:100%;">
-          <h2 style="font-size:18px;font-weight:700;">Stadium Interactive Monitor</h2>
-          <span class="live-tag">LIVE MAP</span>
-        </div>
-        
-        <div class="stadium-map-wrapper" style="width:100%;max-width:480px;margin:15px 0;display:flex;justify-content:center;align-items:center;">
-          <svg id="guided-stadium-svg" viewBox="0 0 600 450" class="stadium-svg" style="width:100%;height:auto;filter:drop-shadow(0 10px 25px rgba(0,0,0,0.5));">
-            <rect class="stadium-outer" x="10" y="10" width="580" height="430" rx="215" fill="none" stroke="#2a2f45" stroke-width="4"/>
-            
-            <!-- Sector Stands -->
-            <path id="guided-sector-A" class="sector-path sector-low" d="M 180,60 L 420,60 L 410,130 L 190,130 Z" />
-            <text x="300" y="100" class="sector-label">A (VIP)</text>
-            <text x="300" y="115" class="sector-density-label" id="guided-density-A">42%</text>
-
-            <path id="guided-sector-B" class="sector-path sector-med" d="M 430,70 L 530,170 L 470,220 L 410,140 Z" />
-            <text x="455" y="150" class="sector-label">B (East)</text>
-            <text x="455" y="165" class="sector-density-label" id="guided-density-B">82%</text>
-
-            <path id="guided-sector-C" class="sector-path sector-med" d="M 530,190 L 470,230 L 410,310 L 430,380 Z" />
-            <text x="455" y="300" class="sector-label">C (North)</text>
-            <text x="455" y="315" class="sector-density-label" id="guided-density-C">88%</text>
-
-            <path id="guided-sector-D" class="sector-path sector-high" d="M 420,390 L 180,390 L 190,320 L 410,320 Z" />
-            <text x="300" y="355" class="sector-label">D (Gate 4)</text>
-            <text x="300" y="370" class="sector-density-label" id="guided-density-D">95%</text>
-
-            <path id="guided-sector-E" class="sector-path sector-med" d="M 170,380 L 70,280 L 130,230 L 190,310 Z" />
-            <text x="145" y="300" class="sector-label">E (West)</text>
-            <text x="145" y="315" class="sector-density-label" id="guided-density-E">78%</text>
-
-            <path id="guided-sector-F" class="sector-path sector-low" d="M 70,170 L 170,70 L 190,140 L 130,220 Z" />
-            <text x="145" y="150" class="sector-label">F (Family)</text>
-            <text x="145" y="165" class="sector-density-label" id="guided-density-F">65%</text>
-
-            <!-- Central Playfield -->
-            <ellipse cx="300" cy="225" rx="140" ry="80" class="playfield" />
-            <text x="300" y="230" class="field-label">CRICKET FIELD</text>
-
-            <!-- Safe route line representation -->
-            <polyline id="guided-route-line" class="route-line-svg hidden" points="" />
-          </svg>
-        </div>
-        
-        <div class="map-legend" style="display:flex;gap:15px;font-size:11px;color:var(--text-muted);justify-content:center;width:100%;border-top:1px solid var(--border-color);padding-top:12px;">
-          <span class="legend-item"><span class="color-box color-low"></span> Low Density (&lt;50%)</span>
-          <span class="legend-item"><span class="color-box color-med"></span> Medium Density (50-80%)</span>
-          <span class="legend-item"><span class="color-box color-high"></span> High Density (&gt;80%)</span>
-          <span class="legend-item"><span class="color-box color-alert"></span> Incident Active</span>
-        </div>
-      </div>
-
-      <!-- Large Emergency SOS Button & Options -->
-      <section class="guided-sos-section panel-glass" style="display:flex;flex-direction:column;gap:15px;padding:24px;border-radius:12px;background:var(--bg-card);border:1px solid var(--border-color);">
-        <h2 style="font-size:18px;font-weight:700;margin-bottom:5px;text-align:center;">Quick SOS Dispatch</h2>
-        
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="form-group-guided" style="display:flex;flex-direction:column;gap:6px;">
-            <label for="guided-sos-sector" style="font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px;">Your Location Stand:</label>
-            <select id="guided-sos-sector" class="input-large" style="width:100%;padding:10px;background:rgba(10,12,22,0.7);border:1px solid var(--border-color);color:var(--text-main);border-radius:8px;outline:none;">
-              <option value="E">West Stand (Sector E)</option>
-              <option value="B">East Stand (Sector B)</option>
-              <option value="C">North Stand (Sector C)</option>
-              <option value="D">Gate 4 Entrance (Sector D)</option>
-              <option value="F">Family Zone (Sector F)</option>
-            </select>
-          </div>
-
-          <div class="form-group-guided" style="display:flex;flex-direction:column;gap:6px;">
-            <label for="guided-sos-type" style="font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px;">Emergency Type:</label>
-            <select id="guided-sos-type" class="input-large" style="width:100%;padding:10px;background:rgba(10,12,22,0.7);border:1px solid var(--border-color);color:var(--text-main);border-radius:8px;outline:none;">
-              <option value="women_sos">Women Safety SOS</option>
-              <option value="medical_emergency">Medical distress</option>
-              <option value="lost_child">Lost Child Alert</option>
-              <option value="crowd_surge">Crowd Surge / Congestion</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group-guided" style="display:flex;flex-direction:column;gap:6px;width:100%;">
-          <label id="guided-sos-description-label" for="guided-sos-description" style="font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px;">Description (Optional):</label>
-          <input type="text" id="guided-sos-description" placeholder="Describe the emergency details (e.g. child wearing red cap, visual landmarks)..." style="width:100%;padding:10px 12px;background:rgba(10,12,22,0.7);border:1px solid var(--border-color);color:var(--text-main);border-radius:8px;outline:none;font-size:13px;box-sizing:border-box;">
-        </div>
-
-        <button class="btn btn-danger btn-large-guided btn-pulse" id="guided-btn-sos" aria-label="Request Emergency Assistance" style="margin-top:10px;font-size:18px;">
-          TRIGGER PRIORITY SOS
-        </button>
-      </section>
-
-      <!-- Voice Interaction Card -->
-      <section class="guided-voice-card panel-glass">
-        <div class="voice-header">
-          <h2 id="guided-voice-title">Speak to Safety Guide</h2>
-          <p class="voice-desc" id="guided-voice-desc">Tap the microphone and ask a question, or choose a shortcut below.</p>
-        </div>
-
-        <div class="voice-mic-container">
-          <button class="btn-mic" id="guided-btn-mic" aria-label="Start Voice Listening" aria-live="polite">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="currentColor" aria-hidden="true">
-              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
-            </svg>
-          </button>
-          <div class="mic-status" id="guided-mic-status" role="status">Microphone is ready. Tap to speak.</div>
-        </div>
-
-        <!-- Text input fallback -->
-        <div class="voice-text-fallback">
-          <input type="text" class="voice-text-input" id="guided-text-input" placeholder="Or type your question here..." aria-label="Type your question">
-          <button class="btn-send" id="guided-btn-send" aria-label="Send message">Send</button>
-        </div>
-
-        <div class="voice-transcript-container hidden" id="guided-transcript-container" aria-live="polite">
-          <div class="transcript-label" id="guided-transcript-label">You said:</div>
-          <div class="transcript-text" id="guided-transcript-output">I feel unsafe</div>
-        </div>
-
-        <div class="voice-response-container hidden" id="guided-response-container" aria-live="assertive">
-          <div class="response-label" id="guided-response-label">Safety Guide says:</div>
-          <div class="response-text-guided" id="guided-response-output">Security is nearby. Please stay in Sector E. We have dispatched stewards to your location.</div>
-        </div>
-
-        <div class="voice-shortcuts">
-          <span class="shortcuts-label" id="guided-shortcuts-label">Or select a common question:</span>
-          <div class="shortcuts-grid">
-            <button class="btn btn-shortcut" id="shortcut-unsafe" aria-label="I feel unsafe">I feel unsafe</button>
-            <button class="btn btn-shortcut" id="shortcut-exit" aria-label="Where should I go?">Where should I go?</button>
-            <button class="btn btn-shortcut" id="shortcut-gate4" aria-label="Is Gate 4 crowded?">Is Gate 4 crowded?</button>
-          </div>
-        </div>
-
-        <div class="multilingual-badge" style="align-self:center;margin-top:4px;">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.06-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zm0 2.93h4.09c.53.78.93 1.65 1.18 2.59H13V7zm0 4.59h5.5c.05.33.09.66.09 1 0 .34-.04.67-.09 1H13v-2zm0 4h3.27c-.25.94-.65 1.81-1.18 2.59H13v-2.59zm0 4.59V19.9c.87-.48 1.64-1.1 2.27-1.82H13z"/></svg>
-          Voice responds in your chosen language
-        </div>
-      </section>
-
-      <!-- Guided Route Calculator Card (Very Simple) -->
-      <section class="guided-route-card panel-glass">
-        <h2 id="guided-route-title">Find a Safe Path</h2>
-        <p class="guided-desc" id="guided-route-desc">Select your current stand to find the quickest, safest way out.</p>
-
-        <div class="guided-route-inputs">
-          <div class="form-group-guided">
-            <label for="guided-route-start">Your Current Location:</label>
-            <select id="guided-route-start" class="input-large">
-              <option value="E">West Stand (Sector E)</option>
-              <option value="B">East Stand (Sector B)</option>
-              <option value="C">North Stand (Sector C)</option>
-              <option value="D">Gate 4 Entrance (Sector D)</option>
-              <option value="F">Family Zone (Sector F)</option>
-            </select>
-          </div>
-          <button class="btn btn-primary btn-large-guided" id="guided-btn-calculate">
-            Find Safest Exit
-          </button>
-        </div>
-
-        <div class="guided-route-result hidden" id="guided-route-result">
-          <div class="result-divider"></div>
-          <h3>Your Directions</h3>
-          <div class="guided-direction-path" id="guided-direction-path">
-            Proceed from West Stand to East Stand, then head to the VIP Safe Haven.
-          </div>
-          
-          <div class="explainability-box">
-            <div class="explain-item">
-              <strong>Situation:</strong> <span id="guided-explain-situation">West Stand contains low lighting.</span>
-            </div>
-            <div class="explain-item">
-              <strong>Recommendation:</strong> <span id="guided-explain-recommendation">Move towards East Stand.</span>
-            </div>
-            <div class="explain-item">
-              <strong>Reason:</strong> <span id="guided-explain-reason">East Stand has active lighting and stewards standing by.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer / Credentials -->
-    <footer class="app-footer">
-      <div>SafeFlow Command Center &copy; 2026. Designed for Cricket Stadium Public Protection.</div>
-      <div class="footer-security">Rate-Limited API &middot; Audit-Logged &middot; Input-Validated &middot; No Personal Data Stored</div>
-      <div id="ai-model-status">Engine: Gemini 2.5 Flash via Google AI SDK (Active)</div>
-    </footer>
-
-  <!-- Active Incidents Overlay Page -->
-  <div class="incidents-overlay hidden" id="incidents-overlay" role="dialog" aria-modal="true" aria-labelledby="incidents-title">
-    <div class="incidents-card panel-glass">
-      <div class="incidents-header" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-color);padding-bottom:12px;margin-bottom:16px;">
-        <h2 id="incidents-title" style="font-size:20px;font-weight:700;margin:0;">Active Incidents Ledger</h2>
-        <button class="btn btn-secondary" id="btn-close-incidents" style="padding:6px 12px;font-size:12px;margin-left:auto;">Close</button>
-      </div>
-      <div id="incidents-list-container" style="display:flex;flex-direction:column;gap:12px;max-height:400px;overflow-y:auto;padding-right:4px;">
-        <!-- Incidents will be dynamically rendered here -->
-      </div>
-      <div style="margin-top:16px;display:flex;justify-content:end;">
-        <button class="btn btn-outline" onclick="simulateIncident('clear')" style="font-size:12px;padding:8px 16px;">Clear All Incidents</button>
+      <div class="timeline-step">
+        <div class="timeline-num">3</div>
+        <h3>Act (Agent 3)</h3>
+        <p style="margin-top:10px;font-size:14px;color:var(--text-muted);">The **Communication Agent** drafts Hindi/English audio script announcements for the public PA, direct user SMS broadcasts, and ground briefings.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <script src="app.js"></script>
+  <!-- Features Section -->
+  <section id="features" style="border-top:1px solid var(--border-color);padding-top:100px;">
+    <div class="section-header">
+      <div class="hero-tag">Capabilities</div>
+      <h2>Core Safety Architecture</h2>
+      <p>SafeFlow is built on top-tier engineering principles, combining heuristic routing with LLM reasoning.</p>
+    </div>
+    <div class="grid-3">
+      <div class="floating-surface">
+        <h3 style="color:var(--color-primary);">Women Safety SOS</h3>
+        <p>Priority response protocol triggering security team dispatches and Dijkstra-routed escorts from low-light zones to secure safe havens.</p>
+      </div>
+      <div class="floating-surface">
+        <h3 style="color:var(--color-primary);">Multilingual Intelligence</h3>
+        <p>Auto-detects language scripts from voice transcriptions and provides custom safety broadcasts and spoken audio feedback in Hindi and English.</p>
+      </div>
+      <div class="floating-surface">
+        <h3 style="color:var(--color-primary);">Human Approval Gate</h3>
+        <p>A mandatory gate allowing control room staff to approve, override, or edit the AI's action plans before PA announcements or dispatches execute.</p>
+      </div>
+      <div class="floating-surface">
+        <h3 style="color:var(--color-primary);">Predictive Forecasting</h3>
+        <p>Runs statistical trend calculations over moving density windows to project bottleneck spikes 12 minutes before they occur.</p>
+      </div>
+      <div class="floating-surface">
+        <h3 style="color:var(--color-primary);">Offline Mock Fallback</h3>
+        <p>A high-fidelity mock engine that mirrors precise JSON API response schemas during rate limiting or network failures to ensure continuous uptime.</p>
+      </div>
+      <div class="floating-surface">
+        <h3 style="color:var(--color-primary);">Rate-Limited & Secure</h3>
+        <p>Engineered with Express rate-limiting, Helmet security headers, and sanitization filters to prevent injection attacks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety Layer Section (Dijkstra Details) -->
+  <section id="safety-layer" class="split-view" style="border-top:1px solid var(--border-color);padding-top:100px;">
+    <div class="split-graphic">
+      <!-- Dijkstra Graphic representation -->
+      <svg viewBox="0 0 400 300" style="width:100%;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.4));">
+        <defs>
+          <linearGradient id="edge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--color-primary)"/>
+            <stop offset="100%" stop-color="var(--color-accent)"/>
+          </linearGradient>
+        </defs>
+        <!-- Nodes -->
+        <circle cx="80" cy="150" r="14" fill="#0c0d21" stroke="#9ca3af" stroke-width="2"/>
+        <text x="80" y="154" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">E</text>
+
+        <circle cx="200" cy="70" r="14" fill="#0c0d21" stroke="#9ca3af" stroke-width="2"/>
+        <text x="200" y="74" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">F</text>
+
+        <circle cx="320" cy="150" r="14" fill="#0c0d21" stroke="#00b4d8" stroke-width="3"/>
+        <text x="320" y="154" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">A</text>
+
+        <circle cx="200" cy="230" r="14" fill="#0c0d21" stroke="#ef476f" stroke-width="2"/>
+        <text x="200" y="234" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">D</text>
+
+        <!-- Dynamic Weights paths -->
+        <path d="M 94,140 L 186,80" stroke="url(#edge-grad)" stroke-width="3" stroke-dasharray="6" fill="none"/>
+        <text x="130" y="100" fill="var(--color-primary)" font-size="10" font-weight="600">Weight = 1.0 (Low density)</text>
+
+        <path d="M 94,160 L 186,220" stroke="#ef476f" stroke-width="2" opacity="0.3" fill="none"/>
+        <text x="130" y="210" fill="#ef476f" font-size="10" font-weight="600">Blocked (Incident Active)</text>
+
+        <path d="M 214,80 L 306,140" stroke="url(#edge-grad)" stroke-width="3" stroke-dasharray="6" fill="none"/>
+        <text x="270" y="100" fill="var(--color-primary)" font-size="10" font-weight="600">Weight = 1.0</text>
+      </svg>
+    </div>
+    <div class="split-desc">
+      <div class="hero-tag">Mathematical Safety</div>
+      <h3>Dynamic Dijkstra Routing</h3>
+      <p>SafeFlow models the stadium as a weighted walkway graph ($V,E$). When pathfinding, edge weights are dynamically computed using current conditions:</p>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.7;">
+        <strong>- Crowd Density:</strong> Exponentially increases weight to divert people away from bottlenecks.<br>
+        <strong>- Vulnerable Profiles:</strong> Adds penalty modifiers to low-light stands for solo women and elderly attendees.<br>
+        <strong>- Sector Incidents:</strong> Applies near-infinite weight to blockages, rendering hazardous sectors impassable.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" style="border-top:1px solid var(--border-color);padding-top:100px;padding-bottom:100px;">
+    <div class="section-header">
+      <div class="hero-tag">Details</div>
+      <h2>Frequently Asked Questions</h2>
+      <p>Have questions about how SafeFlow runs? Read our technical FAQ.</p>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>How does the Multi-Agent orchestration work?</summary>
+        <div class="faq-answer">
+          SafeFlow uses a sequential chain-of-thought orchestration. First, the Awareness Agent triages the stadium state to establish threat levels. Next, the Decision Agent evaluates resource routing. Finally, the Communication Agent formats local broadcasts.
+        </div>
+      </details>
+      <details>
+        <summary>What is the Human-in-the-Loop gate?</summary>
+        <div class="faq-answer">
+          To ensure safety, the AI Decision Agent's resource dispatches and announcements are placed in a pending state. Operators must review, edit, or approve the action plan in their console before broadcasts execute.
+        </div>
+      </details>
+      <details>
+        <summary>How does SafeFlow auto-detect languages?</summary>
+        <div class="faq-answer">
+          The Web Speech API transcribes spectator voice input. Our client-side analyzer runs Unicode block tests (such as script matching for Devanagari) to auto-detect Hindi/English and dynamically switches labels and TTS output.
+        </div>
+      </details>
+      <details>
+        <summary>What happens if the Gemini API is rate-limited or fails?</summary>
+        <div class="faq-answer">
+          SafeFlow features a high-fidelity local Mock AI Engine. It mirrors the exact output schema, risk categories, and Dijkstra paths of the live Gemini models, ensuring zero downtime for observers.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-banner">
+    <h2>Secure Your Stadium Operations</h2>
+    <p>Launch the command center portal to simulate incidents, monitor densities, review AI protocols, or use the spectator safety assistant.</p>
+    <a href="app.html" class="btn btn-primary">Launch Command Center</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>SafeFlow Command Center &copy; 2026. Built for cricket stadium public protection and security.</div>
+    <div class="footer-trust">
+      <span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Audit Logged
+      </span>
+      <span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Input Sanitized
+      </span>
+      <span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Stateless Architecture
+      </span>
+    </div>
+  </footer>
+
 </body>
 </html>

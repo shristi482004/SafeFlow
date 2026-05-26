@@ -5,8 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node src/backend/server.js",
+    "dev": "node --watch src/backend/server.js",
+    "test": "node --test tests/api.test.js"
   },
   "dependencies": {
     "@google/genai": "latest",
